@@ -1,0 +1,104 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="card">
+        <div class="card-body text-center">
+          <h4>Listado de Denuncias</h4>
+          <table  class="table table-striped ">
+            <thead>
+              <tr>
+
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Número de Denuncias</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item2 of user | slice:desde:hasta">
+                <td>{{item2.var_name}}</td>
+                <td>{{item2.var_lastname}}</td>
+                <td>{{item2.Denuncias1}}</td>
+                  <td>
+                    <button title="s" class="btn btn-dark" style="border-radius: 100%;"  (click)="listarDenuncia(item2.id_user)"><i class="fa fa-list" aria-hidden="true"></i></button>
+                    <button title="g" class="btn btn-dark" style="border-radius: 100%;" (click)="EliminarUsuario(item2.id_user)"><i class="fa-solid fa-trash" > </i></button>
+                  </td>
+                  <script type="">
+                    function ver(){
+                      document.getElementById('visualizar').style.display='block';
+                      document.getElementById('container1').style.display='block';
+                    }
+                  </script>
+
+
+                </tr>
+
+
+
+            </tbody>
+          </table>
+          <mat-paginator [length]="user.length"
+              [pageSize]="pageSize"
+              (page)="cambiarPagina($event)"
+              >
+          </mat-paginator>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div *ngIf="mostrar" class="container mt-5" id="Denun">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="card">
+        <div class="card-body text-center">
+          <h5 class="table-title">Lista de Denuncias</h5>
+          <table *ngIf="denuncias.length>0" class="table table-striped ">
+
+            <thead>
+              <tr>
+                <th scope="col">Categoría</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido </th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Fecha mes</th>
+                <th scope="col">Horas</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of denuncias | slice:desde2:hasta2">
+                <td>{{item.NombreCategoria}}</td>
+                <td>{{item.NombreUsuario}}</td>
+                <th >{{item.SegundoNombre}}</th>
+                <td>{{item.Descripcion}}</td>
+                <td>{{item.dateComplaint}}</td>
+                <td>{{item.hourComplaint}}</td>
+                <td>
+                  <button title="f" class="btn btn-dark" style="border-radius: 100%;" (click)="eliminarDenuncia(item.id_COMPLAINT)"> <i class="fa-solid fa-trash" ></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h5 *ngIf="denuncias.length<=0">No hay Denuncias</h5>
+          <mat-paginator *ngIf="denuncias.length>0" [length]="denuncias.length"
+              [pageSize]="pageSize2"
+              (page)="cambiarPagina2($event)"
+              >
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">

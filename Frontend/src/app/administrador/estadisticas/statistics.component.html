@@ -1,0 +1,104 @@
+<h4 class="titulo">Estadísticas</h4>
+<div class="content-charts">
+    <div class="content">
+        <div class="content-charts-1">
+            <h5 class="content-charts-1-title">Top 10 de productos más visitados</h5>
+            <div class="content-charts-1-selects">
+                <i [ngClass]="{'content-charts-1-selects-select':selectedTypeChartCategories=='bar'?true:false,'content-charts-1-selects-item':selectedTypeChartCategories=='bar'?false:true }"
+                    class="fa-solid fa-chart-column" (click)="changeChart('1','bar')"></i>
+                <i [ngClass]="{'content-charts-1-selects-select':selectedTypeChartCategories=='line'?true:false,'content-charts-1-selects-item':selectedTypeChartCategories=='line'?false:true}"
+                    class="fa-solid fa-chart-line" (click)="changeChart('1','line')"></i>
+                <i [ngClass]="{'content-charts-1-selects-select':selectedTypeChartCategories=='pie'?true:false,'content-charts-1-selects-item':selectedTypeChartCategories=='pie'?false:true}"
+                    class="fa-solid fa-chart-pie" (click)="changeChart('1','pie')"></i>
+                <i [ngClass]="{'content-charts-1-selects-select':selectedTypeChartCategories=='doughnut'?true:false,'content-charts-1-selects-item':selectedTypeChartCategories=='doughnut'?false:true}"
+                    class="fa-solid fa-circle-dot" (click)="changeChart('1','doughnut')"></i>
+            </div>
+            <app-graphic [type]="selectedTypeChartCategories" [idCanva]="'1'"></app-graphic>
+            <div class="details">
+                <h6 [title]="topCategories.label"><i style="color:green" class="fa-solid fa-arrow-turn-up"></i> {{topCategories.label.substring(0,25)}}: <span style="color:green">{{topCategories.value}}</span></h6>
+                <h6 [title]="downCategories.label"><i style="color:red"  class="fa-solid fa-arrow-turn-down"></i> {{downCategories.label.substring(0,25)}}: <span style="color:red">{{downCategories.value}}</span></h6>
+            </div>
+            <select [(ngModel)]="selectChart.select" class="select-category" (change)="getDataCategories('1')">
+                <option *ngFor="let item of categories" [value]="item.id_product_category">{{item.var_name}}</option>
+            </select>
+        </div>
+        <div class="content-charts-1">
+            <h5 class="content-charts-1-title">Suscripciones en categorías</h5>
+            <div class="content-charts-1-selects">
+                <i [ngClass]="{'content-charts-1-selects-select':selectedTypeChartCategoriesTop=='bar'?true:false,'content-charts-1-selects-item':selectedTypeChartCategoriesTop=='bar'?false:true }"
+                    class="fa-solid fa-chart-column" (click)="changeChart('3','bar')"></i>
+                <i [ngClass]="{'content-charts-1-selects-select':selectedTypeChartCategoriesTop=='line'?true:false,'content-charts-1-selects-item':selectedTypeChartCategoriesTop=='line'?false:true}"
+                    class="fa-solid fa-chart-line" (click)="changeChart('3','line')"></i>
+                <i [ngClass]="{'content-charts-1-selects-select':selectedTypeChartCategoriesTop=='pie'?true:false,'content-charts-1-selects-item':selectedTypeChartCategoriesTop=='pie'?false:true}"
+                    class="fa-solid fa-chart-pie" (click)="changeChart('3','pie')"></i>
+                <i [ngClass]="{'content-charts-1-selects-select':selectedTypeChartCategoriesTop=='doughnut'?true:false,'content-charts-1-selects-item':selectedTypeChartCategoriesTop=='doughnut'?false:true}"
+                    class="fa-solid fa-circle-dot" (click)="changeChart('3','doughnut')"></i>
+            </div>
+            <app-graphic [type]="selectedTypeChartCategoriesTop" [idCanva]="'3'"></app-graphic>
+            <div class="details-final">
+                <h6 [title]="topCategory.label"><i style="color:green" class="fa-solid fa-arrow-turn-up"></i> {{topCategory.label.substring(0,25)}}: <span style="color:green">{{topCategory.value}}</span></h6>
+                <h6 [title]="downCategory.label"><i style="color:red"  class="fa-solid fa-arrow-turn-down"></i> {{downCategory.label.substring(0,25)}}: <span style="color:red">{{downCategory.value}}</span></h6>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-charts-1">
+            <h5 class="content-charts-1-title">Usuarios registrados</h5>
+            <div class="content-charts-1-selects">
+                <i [ngClass]="{'content-charts-1-selects-select':selectedTypeChartRegister=='bar'?true:false,'content-charts-1-selects-item':selectedTypeChartRegister=='bar'?false:true }"
+                    class="fa-solid fa-chart-column" (click)="changeChart('2','bar')"></i>
+                <i [ngClass]="{'content-charts-1-selects-select':selectedTypeChartRegister=='line'?true:false,'content-charts-1-selects-item':selectedTypeChartRegister=='line'?false:true}"
+                    class="fa-solid fa-chart-line" (click)="changeChart('2','line')"></i>
+            </div>
+            <app-graphic [type]="selectedTypeChartRegister" [idCanva]="'2'"></app-graphic>
+            <div class="details">
+                <h6 [title]="topRegister.label"><i style="color:green" class="fa-solid fa-arrow-turn-up"></i> {{topRegister.label.substring(0,25)}}: <span style="color:green">{{topRegister.value}}</span></h6>
+                <h6 [title]="downRegister.label"><i style="color:red"  class="fa-solid fa-arrow-turn-down"></i> {{downRegister.label.substring(0,25)}}: <span style="color:red">{{downRegister.value}}</span></h6>
+            </div>
+            <div class="content-charts-1-inputs" *ngIf="selectChart.selectTypeRegister==0">
+                <label for="inputFirstDate">Entre: </label>
+                <input [(ngModel)]="selectRegister.firstDate" #inputFirstDate type="date" (change)="mostrarTrae('2')">
+                <label for="inputFirstDate"> a </label>
+                <input [(ngModel)]="selectRegister.lastDate" #inputFirstDate type="date" (change)="mostrarTrae('2')">
+            </div>
+            <select [(ngModel)]="selectChart.selectTypeRegister" class="select-category" (change)="getRegisterUserData('2')">
+                <option value="7">Ultimos 7 días</option>
+                <option value="14">Ultimos 14 días</option>
+                <option value="30">Ultimos 30 días</option>
+                <option value="60">Ultimos 2 meses</option>
+                <option value="180">Ultimos 6 meses</option>
+                <option value="365">Ultimos 365 días</option>
+                <option value="0">Personalizada</option>
+            </select>
+        </div>
+        <div class="content-charts-1">
+            <h5 class="content-charts-1-title">Visitas</h5>
+            <div class="content-charts-1-selects">
+                <i [ngClass]="{'content-charts-1-selects-select':selectedTypeChartViews=='bar'?true:false,'content-charts-1-selects-item':selectedTypeChartViews=='bar'?false:true }"
+                    class="fa-solid fa-chart-column" (click)="changeChart('4','bar')"></i>
+                <i [ngClass]="{'content-charts-1-selects-select':selectedTypeChartViews=='line'?true:false,'content-charts-1-selects-item':selectedTypeChartViews=='line'?false:true}"
+                    class="fa-solid fa-chart-line" (click)="changeChart('4','line')"></i>
+            </div>
+            <app-graphic [type]="selectedTypeChartViews" [idCanva]="'4'"></app-graphic>
+            <div class="details">
+                <h6 [title]="topViews.label"><i style="color:green" class="fa-solid fa-arrow-turn-up"></i> {{topViews.label}}: <span style="color:green">{{topViews.value}}</span></h6>
+                <h6 [title]="downViews.label"><i style="color:red"  class="fa-solid fa-arrow-turn-down"></i> {{downViews.label}}: <span style="color:red">{{downViews.value}}</span></h6>
+            </div>
+            <div class="content-charts-1-inputs" *ngIf="selectChart.selectTypeViews==0">
+                <label for="inputFirstDate">Entre: </label>
+                <input [(ngModel)]="selectViews.firstDate" #inputFirstDate type="date" (change)="getViewsData('4')">
+                <label for="inputFirstDate"> a </label>
+                <input [(ngModel)]="selectViews.lastDate" #inputFirstDate type="date" (change)="getViewsData('4')">
+            </div>
+            <select [(ngModel)]="selectChart.selectTypeViews" class="select-category" (change)="getViewData('4')">
+                <option value="7">Ultimos 7 días</option>
+                <option value="14">Ultimos 14 días</option>
+                <option value="30">Ultimos 30 días</option>
+                <option value="60">Ultimos 2 meses</option>
+                <option value="180">Ultimos 6 meses</option>
+                <option value="365">Ultimos 365 días</option>
+                <option value="0">Personalizada</option>
+            </select>
+        </div>
+    </div>
+</div>

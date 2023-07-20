@@ -1,0 +1,22 @@
+body{
+
+  background: -webkit-linear-gradient(to right, #1f1f1f ,#8e8e8e);
+
+  background: -webkit-gradient(to right, #1f1f1f ,#8e8e8e);
+}
+
+.bi{
+  cursor: pointer;
+  margin-left: 7px;
+}
+
+.btn{
+  cursor: pointer;
+  margin-left: 7px;
+
+}
+.l1{
+  margin-left: 500px;
+
+}
+

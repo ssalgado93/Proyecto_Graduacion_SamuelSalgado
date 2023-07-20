@@ -1,0 +1,219 @@
+<section
+  class="ftco-section"
+  style="
+    background-color: white;
+    margin: 0 auto;
+    width: 1000px;
+    padding-left: 50px;
+    padding-right: 50px;
+  "
+>
+  <div class="container" style="height: 100vh">
+    <div class="row justify-content-center">
+      <div
+        class="col-md-6 text-center mb-5"
+        style="display: inline-block; width: 80%"
+      >
+        <h4 class="heading-section" style="padding-top: 40px">
+          Usuarios Activos
+        </h4>
+      </div>
+    </div>
+
+    <div class="row" style="overflow-y: scroll; height: 360px">
+      <div class="col-md-12">
+        <div class="table-wrap">
+          <table class="table table-striped">
+            <thead>
+              <tr style="color: white; background-color: #252f37">
+                <th>No.</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Rol</th>
+                <th>Status</th>
+
+                <th style="text-align: center">Editar Rol</th>
+                <th style="text-align: center">Editar Estado</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let usuario of usuarios; let indice = index">
+              <tr>
+                <th scope="row">{{ indice + 1 }}</th>
+                <td>{{ usuario.var_name }}</td>
+                <td>{{ usuario.var_lastname }}</td>
+                <td *ngIf="usuario.bit_rol == '0'">Administrador</td>
+                <td *ngIf="usuario.bit_rol == '1'">Usuario</td>
+                <td *ngIf="usuario.bit_status == '0'">Bloqueado</td>
+                <td *ngIf="usuario.bit_status == '1'">Activo</td>
+                <td style="text-align: center;">
+                  <button
+                    type="submit"
+                    class="btn btn-secondary"
+                    style="border-radius: 100%"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    (click)="getOneUser(usuario.id_user)"
+                  >
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+                </td>
+                <td style="text-align: center;">
+                  <button
+                    type="submit"
+                    class="btn btn-secondary"
+                    style="border-radius: 100%"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal2"
+                    (click)="getOneUser2(usuario.id_user)"
+                  >
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Rol</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="limpiar()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="usuarioForm" method="POST">
+          <select
+            [(ngModel)]="user2.bit_rol"
+            class="input"
+            type="text"
+            placeholder="0"
+            name="Usuario"
+            formControlName="bit_rol"
+            required
+          >
+            <option value="0">Administrador</option>
+            <option value="1">Usuario</option>
+          </select>
+          <div
+            class="errors-container"
+            *ngIf="
+              usuarioControl.invalid &&
+              (usuarioControl.touched || usuarioControl.dirty)
+            "
+          >
+            <p class="errors-msg" *ngIf="usuarioControl.hasError('required')">
+              El campo es obligatorio
+            </p>
+          </div>
+          <button
+            style="float: right"
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+            (click)="limpiar()"
+          >
+            Cerrar
+          </button>
+          <button
+            style="float: right; margin-right: 10px"
+            [disabled]="usuarioForm.invalid"
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            (click)="guardarCambios(user2.id_user)"
+          >
+            Guardar cambios
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal2"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Estado</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="limpiar()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="usuarioForm2" method="POST">
+          <select
+            [(ngModel)]="user3.bit_status"
+            class="input"
+            type="text"
+            placeholder="0"
+            name="Usuario"
+            formControlName="bit_status"
+            required
+          >
+            <option value="1">Activo</option>
+            <option value="0">Bloqueado</option>
+          </select>
+          <div
+            class="errors-container"
+            *ngIf="
+              usuarioControl2.invalid &&
+              (usuarioControl2.touched || usuarioControl2.dirty)
+            "
+          >
+            <p class="errors-msg" *ngIf="usuarioControl2.hasError('required')">
+              El campo es obligatorio
+            </p>
+          </div>
+          <button
+            style="float: right"
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+            (click)="limpiar()"
+          >
+            Cerrar
+          </button>
+          <button
+            style="float: right; margin-right: 10px"
+            [disabled]="usuarioForm2.invalid"
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            (click)="guardarCambios2(user3.id_user)"
+          >
+            Guardar cambios
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

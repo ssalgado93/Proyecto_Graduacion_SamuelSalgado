@@ -1,0 +1,92 @@
+<section class="ftco-section" style="background-color: white; margin: 0 auto ;width: 1000px; ;  padding-left: 50px; padding-right: 50px;">
+    <div class="container" style="height: 100vh;">
+    <div class="row justify-content-center">
+    <div class="col-md-6 text-center mb-5" style="display: inline-block; width:80%">
+    <h4 class="heading-section" style="padding-top: 40px; ">Categorías Actuales</h4>
+    <button type="button" class="btn btn-warning" style="color:white; background-color: #faa01e; border-radius: 20px; float: right;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Agregar <i class="fa-solid fa-circle-plus"></i></button>
+
+    </div>
+    </div>
+
+
+    <div class="row" style="overflow-y: scroll; height: 360px">
+    <div class="col-md-12">
+    <div class="table-wrap">
+    <table class="table table-striped" >
+    <thead>
+    <tr style="color: white; background-color:#252F37 ; ">
+    <th>No.</th>
+    <th >Categoría</th>
+
+    <th colspan="2" style="text-align: center;">Opciones</th>
+
+    </tr>
+    </thead>
+    <tbody *ngFor="let item of categories; let indice=index">
+    <tr>
+    <th scope="row">{{indice+1}}</th>
+    <td>{{item.var_name}}</td>
+    <td><button type="submit" class="btn btn-secondary" style="border-radius: 100%;" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getCategory(item.id_product_category)"> <i class="fa-solid fa-pen"></i></button></td>
+    <td>
+        <button type="submit" class="btn btn-dark" style="border-radius: 100%;" (click)="eliminar(item.id_product_category,item.var_name)"><i class="fa-solid fa-trash" ></i></button></td>
+    </tr>
+
+    </tbody>
+    </table>
+
+    </div>
+
+    </div>
+
+    </div>
+    </div>
+
+
+    </section>
+
+    <!--modal-->
+
+<div class="modal fade"  id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar Categoría</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="limpiar()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="categoryForm" method="POST">
+        <input  [(ngModel)]="category.var_name"  class="input" type="text" placeholder="Nombre de la categoría " name="categoria" formControlName="categoria" required>
+        <div class="errors-container" *ngIf="categoriaControl.invalid && (categoriaControl.touched || categoriaControl.dirty)">
+            <p class="errors-msg" *ngIf="categoriaControl.hasError('required') ">El campo es obligatorio</p>
+             </div>
+        <button style="float:right ;" type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="limpiar()">Cerrar</button>
+        <button style="float: right;margin-right: 10px;"type="button" class="btn btn-primary" (click)="addCategory()" data-bs-dismiss="modal" >Guardar</button>
+        </form>
+    </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Categoría</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="limpiar()"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="categoryForm" method="POST">
+        <input  [(ngModel)]="category.var_name"  class="input" type="text" placeholder="" name="categoria" formControlName="categoria" required>
+        <div class="errors-container" *ngIf="categoriaControl.invalid && (categoriaControl.touched || categoriaControl.dirty)">
+            <p class="errors-msg" *ngIf="categoriaControl.hasError('required') ">El campo es obligatorio</p>
+             </div>
+        <button style="float: right;" type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="limpiar()">Cerrar</button>
+        <button style="float: right;margin-right: 10px;" type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="guardarCambios() ">Guardar cambios</button>
+        </form>
+    </div>
+
+    </div>
+  </div>
+</div>

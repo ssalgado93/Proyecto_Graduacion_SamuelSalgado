@@ -1,0 +1,46 @@
+<header class="header">
+    <div class="container">
+        <div class="logo">
+            <img src="../../../assets/Imagenes/LOGO2.png" alt="logo_empresa">
+        </div>
+        <nav class="menu">
+            <div>
+                <a routerLink="../navegacionProductos">Ver Productos</a>
+                <a routerLink='' routerLinkActive="active">Salir</a>
+            </div>
+        </nav>
+    </div>
+</header>
+<div class="container-page">
+    <div class="menu-admin">
+
+        <div class="div-botones">
+            <button routerLink="usuarios" routerLinkActive="active">
+                <i class="fa-regular fa-chart-bar"></i>Usuarios
+            </button>
+            <button routerLink="../administrador" routerLinkActive="active">
+                <i class="fa-regular fa-chart-bar"></i>Categorías
+            </button>
+            <br>
+            <button routerLink="quejas" routerLinkActive="active">
+                <i class="fa-solid fa-triangle-exclamation"></i>Denuncias
+            </button>
+            <br>
+            <button routerLink="fechaexpiracion" routerLinkActive="active">
+                <i class="fa-solid fa-clock"></i>Expiración de anuncios
+            </button>
+            <br>
+            <button routerLink="estadisticas" routerLinkActive="active">
+                <i class="fa-solid fa-chart-line"></i>Estadísticas
+            </button>
+        </div>
+
+
+            
+    </div>
+    <div class="components-container">
+        <!--Se intercambiara por los dierentes componentes-->
+        <router-outlet></router-outlet>
+    </div>
+
+</div>

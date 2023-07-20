@@ -1,0 +1,41 @@
+<header class="header">
+    <div class="container">
+        <div class="logo">
+            <img src="../../../assets/Imagenes/LOGO2.png" alt="logo_empresa">
+        </div>
+        <nav class="menu">
+            <a href="" routerLinkActive="/landing">Inicio</a>
+        </nav>
+    </div>
+</header>
+
+
+
+<head>
+    <link rel="stylesheet" href="module2.component.css">
+</head>
+<div id="formDiv">
+    <form  [formGroup]="module2Form" class="inputs-container" id="id-form" action="" method="POST" (ngSubmit)="obtenerCodigo()">
+    <div>
+        
+
+        <h1>Ingresa el código de confirmación</h1>
+        <h3 style="font-size: 14px; text-align: center; margin-top: 20px; margin-bottom: 20px;">Hemos enviado un código a tu correo electrónico, revisa tu bandeja de entrada e introdúcelo a continuación:</h3>
+        <input [(ngModel)]="modulo2.var_code" class="codigoVer" type="text" placeholder="ejemplo:2345awe" name="codigoVeri" formControlName="codigo"  id="codigo" name="codigo"  required>
+        <div *ngIf="codigoVerificacion.invalid && (codigoVerificacion.touched || codigoVerificacion.dirty)">
+            <p *ngIf="codigoVerificacion.hasError('required')">El campo es obligatorio</p>
+            <p *ngIf="codigoVerificacion.hasError('pattern')">Debe tener 7 caracteres, con minusculas, mayusculas y numeros</p>
+        </div>
+        <div *ngIf="validate">
+            <p>Ocurrio un error al querer verificar el codigo</p>
+        </div>
+    </div>
+    <!--[disabled]="productoForm.invalid" -->
+
+    <button type="submit" style="font-size: 16x;padding: 1px ;"class="btn btn-success btn-lg float-end" [disabled]="codigoVerificacion.invalid" (click)="obtenerCodigo()">Continuar</button>
+</form>
+</div>
+
+
+
+   

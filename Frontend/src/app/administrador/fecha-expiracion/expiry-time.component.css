@@ -1,0 +1,68 @@
+
+.container-page{
+    display: flex;
+    width: 100%;
+    margin-top: 10vh;
+    display: flex;
+    justify-content: center;
+}
+
+.expiryTimeBox{
+    background-color: white;
+    width: 120vh;
+    height: 60vh;
+    border-style: groove;
+    border-width: 2px;
+    border-color: lightgrey;
+    border-radius: 10px;
+  
+}
+
+.updateBox{
+    display: flex;
+    justify-content: center
+
+}
+
+input{
+    margin-left: 2vh;
+    width: 20vh;
+    height: 4vh;
+    box-shadow: 1px 1px 1px 1px rgba(110,110,110,0.75);
+    font-size: 1em;
+}
+
+button{
+    color:azure;
+    background-color: #252F37;
+    border-radius: 3vh;
+    border: #252F37;
+    font-size: 2.2vh;
+    height: 5vh;
+    width: 20vh;
+}
+
+.divButton{
+    margin-top: 5vh;
+    display: flex;
+    justify-content: center
+}
+
+h1{
+    margin-top: 5vh;
+    margin-bottom: 10vh;
+    color: #252F37;
+    font-size: 3.5vh;
+    display: flex;
+    justify-content: center
+}
+
+b{
+    margin-right: 0.5vh;
+    margin-left: 0.5vh;
+}
+
+h4{
+    font-size: 2.2vh;
+}
+
