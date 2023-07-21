@@ -70,6 +70,7 @@ export class EquipoService {
   eliminarProducto(id:string):Observable<any>{
     return this.http.delete(this.url +id);
   }
+
   productoFoto(file:FormData, id:string|null){
     return this.http.post(this.url +"/product/postImage/"+id,file);
   }
@@ -105,7 +106,6 @@ export class EquipoService {
   borrarProducto(id: String ){
     return this.http.delete(this.url+"/productDelete/"+id)
   }
-
 
   //Trae los usuario con denuncias
   getUserDenuncia(){
@@ -152,7 +152,7 @@ export class EquipoService {
     return this.http.get(this.url+"/prom/"+fk_id_user_qualified)
   }
 
-  updateProduct(id_product:string|null, product:newProducto){
+  updateProduct(id_product:string|null, product:editProducto){
     return this.http.put(this.url+"/editProduct/"+id_product, product)
   }
 
@@ -222,6 +222,11 @@ export class EquipoService {
   updateUsuarios2(id_user:updateUsuario2){
     return this.http.post(this.url+"/updateUsuarios2/",id_user)
   }
+
+  //listar bitacora
+  getBitacora(){
+  return this.http.get(this.url+"/admin/getBitacora")
+}
 }
 
 
@@ -303,6 +308,17 @@ export interface newProducto {
     categoria?:string
 }
 
+export interface editProducto {
+  fk_id_user: string | null
+  fk_id_department: string
+  fk_id_product_category: string
+  fk_id_product_status: string
+  var_name: string
+  text_description: string
+  dou_price: string |any
+  categoria?:string
+}
+
 export interface uploadPhoto{
   file:FormData | null,
   fk_id_product: string
@@ -331,10 +347,6 @@ export interface user{
 
 export interface deleteWishlist{
   id_user:string|null
-  id_product:string
-}
-
-export interface deleteProduct{
   id_product:string
 }
 
@@ -412,6 +424,13 @@ export interface Usuario{
   bit_status:string;
 }
 
+export interface Bitacora{
+  var_name:any;
+  var_lastname:any;
+  action:any;
+  date:any;
+  category_name:any;
+}
 
 //Crear una nueva interfaz para denuncias
 

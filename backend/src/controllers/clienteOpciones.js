@@ -62,7 +62,7 @@ controller.postProduct = (req,res) =>{
                 res.json({status: '200', id:rows[0].id}) // Consulta correcta retorna el id del producto
             })
         }
-    insertlog("Publicacion nueva: "+var_name, 1, fk_id_user);
+    insertlog("Publicacion nueva: "+ var_name, 1, fk_id_user);
     })    
 }
 
@@ -161,7 +161,6 @@ controller.productFiltering = (req,res) =>{
 }
 */
 
-//Funcion para eliminar producto dado un id
 controller.deleteProduct = (req,res)=>{
     const {id} = req.params
 
@@ -344,7 +343,7 @@ controller.editProduct=(req,res)=>{
     WHERE id_product=${id_product}`
 
     conection.query(sql1,(err,rows, fields)=>{
-        insertlog("Publicacion editada: "+var_name, 1, 215);
+        insertlog("Publicacion editada: "+var_name, 2, fk_id_user);
         if(err)
             return res.json({status:'0', msg:err.sqlMessage})
         else

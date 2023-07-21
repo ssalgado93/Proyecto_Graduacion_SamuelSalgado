@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EquipoService, traerProducto, user, deleteProduct,Images, newProducto } from '../../SERVICES/equipo.service';
+import { EquipoService, traerProducto, user,Images, editProducto, newProducto } from '../../SERVICES/equipo.service';
 import { NewProductsComponent } from '../nuevo-producto/new-products.component';
 import { ProductsComponent } from '../productos/products.component';
 import { PageEvent } from '@angular/material/paginator';
@@ -7,8 +7,6 @@ import { FormControl, FormGroup, Validators} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { formating } from 'src/assets';
 import { CurrencyPipe } from '@angular/common';
-
-
 
 @Component({
   selector: 'app-published-products',
@@ -25,12 +23,10 @@ export class PublishedProductsComponent implements OnInit {
   public archivos: any = []; //Sera de tipo array
   public image: any; //Enviar una imagen a la vez al servidor
   public alertMsg=''
+  public id_usuario = localStorage.getItem('token')
   constructor(private equipoService:EquipoService,private currencyPipe: CurrencyPipe) { }
 
   ngOnInit(): void {
-    this.usuario.fk_id_user = localStorage.getItem('token');
-    const fk_id_user = localStorage.getItem('token');
-    console.log('id del usuario: ' + fk_id_user);
     this.srcArray.length = 0
     this.getProducList()
     this.equipoService.getProductCategories().subscribe(res=>{
@@ -56,7 +52,7 @@ export class PublishedProductsComponent implements OnInit {
   }
   
   borrarProd(id_product:string){
-    
+
     Swal.fire({
       title: '¿Estás seguro que deseas eliminar el artículo?',
       icon: 'warning',
@@ -87,6 +83,7 @@ export class PublishedProductsComponent implements OnInit {
     })
 
   }
+
 
 
   
@@ -181,16 +178,16 @@ public fotos=[]
       localStorage.setItem("idProductoModal",id_product) //lo usamos despues para cargar el producto y actualizarlo
       this.equipoService.getUnProducto(localStorage.getItem("idProductoModal")).subscribe(res=>{
           this.producto = res[0]
-          this.formating.format = this.producto.dou_price
-          if(this.producto.categoria=='Indefinida'){
+          this.formating.format = this.producto2.dou_price
+          if(this.producto2.categoria=='Indefinida'){
             this.alertMsg="La categoria de este producto ha sido eliminada del sistema, edita tu producto seleccionando otra categoria"
           }
       }, err=>console.log(err))
     }
 
     guardarCambios(){
-        this.equipoService.updateProduct(localStorage.getItem("idProductoModal"), this.producto).subscribe(res=>{
-            console.log(res)
+        this.equipoService.updateProduct(localStorage.getItem("idProductoModal"), this.producto2).subscribe(res=>{
+            this.ngOnInit()
         })
     }
 
@@ -236,7 +233,8 @@ public fotos=[]
 
 
 /* Para subir Archivo*/
-subirArchivo(): any {Swal.fire({
+subirArchivo(): any {
+  Swal.fire({
   position: 'center',
   icon: 'success',
   title: 'Publicación editada con exito',
@@ -244,10 +242,11 @@ subirArchivo(): any {Swal.fire({
   timer: 1500
 })
 
-  //Sube el producto
+  //Actualizar el producto
 if(this.cargadas.length>=1){
-  this.equipoService.updateProduct(localStorage.getItem("idProductoModal"), this.producto).subscribe(res=>{
+  this.equipoService.updateProduct(localStorage.getItem("idProductoModal"), this.producto2).subscribe(res=>{
     console.log(res)
+    this.ngOnInit()
    // var info: BookInfo2 = <any>res;
    
     
@@ -286,7 +285,17 @@ if(this.cargadas.length>=1){
   }
 
   public producto: newProducto = {
-    fk_id_user: '',
+    fk_id_user:'',
+    fk_id_department: '',
+    fk_id_product_category: '',
+    fk_id_product_status: '',
+    var_name: '',
+    text_description: '',
+    dou_price: '0',
+  };
+
+  public producto2: editProducto = {
+    fk_id_user: this.id_usuario,
     fk_id_department: '',
     fk_id_product_category: '',
     fk_id_product_status: '',
@@ -312,9 +321,9 @@ formating:formating={
 
 formateo(event:Event) {
   const target = event.target as HTMLInputElement;
-  target.value = this.producto.dou_price;
-  this.formating.format = this.producto.dou_price;
-  this.formating.format = this.producto.dou_price;
+  target.value = this.producto2.dou_price;
+  this.formating.format = this.producto2.dou_price;
+  this.formating.format = this.producto2.dou_price;
 }
 
 transformAmount(event:Event) {
@@ -326,12 +335,12 @@ transformAmount(event:Event) {
 
   if (this.formating.format==null) {
     target.value = 'L. 0.00';
-    this.producto.dou_price = '0';
+    this.producto2.dou_price = '0';
   }else{
     target.value = this.formating.format;
-    this.producto.dou_price = this.formating.format.substring(3).replace(/,/gi, '');
+    this.producto2.dou_price = this.formating.format.substring(3).replace(/,/gi, '');
   }
-  console.log(this.producto.dou_price);
+  console.log(this.producto2.dou_price);
 }
 
 

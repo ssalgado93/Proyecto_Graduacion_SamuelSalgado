@@ -20,7 +20,7 @@ export class NewProductsComponent implements OnInit {
   constructor(private equipoService: EquipoService, private raute: Router, private currencyPipe: CurrencyPipe) {}
 
   ngOnInit(): void {
-    
+    this.productoNew.fk_id_user = localStorage.getItem('token');
     // Traer todas las categorias
     this.equipoService.getProductCategories().subscribe(
       (res) => {

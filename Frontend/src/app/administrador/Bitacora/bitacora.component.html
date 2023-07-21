@@ -1,0 +1,52 @@
+<section
+  class="ftco-section"
+  style="
+    background-color: white;
+    margin: 0 auto;
+    width: 1000px;
+    padding-left: 50px;
+    padding-right: 50px;
+  "
+>
+  <div class="container" style="height: 100vh">
+    <div class="row justify-content-center">
+      <div
+        class="col-md-6 text-center mb-5"
+        style="display: inline-block; width: 80%"
+      >
+        <h4 class="heading-section" style="padding-top: 40px">
+          Bitacoras
+        </h4>
+      </div>
+    </div>
+
+    <div class="row" style="overflow-y: scroll; height: 360px">
+      <div class="col-md-12">
+        <div class="table-wrap">
+          <table class="table table-striped">
+            <thead>
+              <tr style="color: white; background-color: #252f37">
+                <th>No.</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Accion</th>
+                <th>Fecha</th>
+                <th>Categoria</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let bitacora of log; let indice = index">
+              <tr>
+                <th scope="row">{{ indice + 1 }}</th>
+                <td>{{ bitacora.var_name }}</td>
+                <td>{{ bitacora.var_lastname }}</td>
+                <td>{{ bitacora.action }}</td>
+                <td>{{ bitacora.date }}</td>
+                <td>{{ bitacora.category_name }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

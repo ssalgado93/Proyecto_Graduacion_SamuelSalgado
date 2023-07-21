@@ -91,7 +91,7 @@
           <!--Boton para subir el archivo-->
           <div class="form">
             <div class="form-floating mb-3 mt-3">
-              <input type="text" id="titulo" class="form-control form-control-lg" [(ngModel)]="producto.var_name"
+              <input type="text" id="titulo" class="form-control form-control-lg" [(ngModel)]="producto2.var_name"
                 placeholder="Escribe el titulo" formControlName="titulo" name="titulo" #titulo required
                 formControlName="titulo">
 
@@ -126,7 +126,7 @@
 
           <div class="form">
             <div class="form-floating mb-3 mt-3">
-              <select class="form-select" [(ngModel)]="producto.fk_id_product_category" id="categoria" name="categoria"
+              <select class="form-select" [(ngModel)]="producto2.fk_id_product_category" id="categoria" name="categoria"
                 required formControlName="categoria">
                 <option *ngFor="let category of categories" [value]="category.id_product_category">
                   {{category.var_name}}
@@ -146,7 +146,7 @@
 
           <div class="form">
             <div class="form-floating mb-3 mt-3">
-              <select class="form-select" [(ngModel)]="producto.fk_id_product_status" name="estado" id="estado"
+              <select class="form-select" [(ngModel)]="producto2.fk_id_product_status" name="estado" id="estado"
                 formControlName="estado">
                 <option value="1">Nuevo</option>
                 <option value="2">Usado</option>
@@ -162,7 +162,7 @@
 
           <div class="form">
             <div class="form-floating mb-3 mt-3">
-              <textarea class="form-control form-control-lg" id="descripcion" [(ngModel)]="producto.text_description"
+              <textarea class="form-control form-control-lg" id="descripcion" [(ngModel)]="producto2.text_description"
                 rows="2" placeholder="descripcion" style="height: 150px;font-size: 17px;" required
                 formControlName="decripcion"></textarea>
               <label for="descripcion">Descripción del Producto</label>
@@ -186,7 +186,7 @@
                   <div>
                     <td class="tbl-col-nombre">Ubicación</td>
                     <td class="tbl-col-depto">
-                      <select class="form-select" [(ngModel)]="producto.fk_id_department" name="Departamento"
+                      <select class="form-select" [(ngModel)]="producto2.fk_id_department" name="Departamento"
                         formControlName="ubicacion" id="ubicacion" style="width: fit-content;">
                         <option value="1">Atlántida</option>
                         <option value="2">Colón</option>
